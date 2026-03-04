@@ -13,17 +13,26 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[github](https://github.com/khayliang)]
 
+* Role: Developer
+* Responsibilities: ?
+
 ### Minh Duc
 
 <img src="images/vuminhducvmd.png" width="200px">
 
 [[github](https://github.com/vuminhducvmd)]
 
+* Role: Developer
+* Responsibilities: ?
+
 ### Tang Zhi Xiang
 
 <img src="images/darkrelicz.png" width="200px">
 
 [[github](https://github.com/darkrelicz)]
+
+* Role: Developer
+* Responsibilities: ?
 
 ### Tan Yu Quan
 
@@ -41,4 +50,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/beedahju)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: ?
