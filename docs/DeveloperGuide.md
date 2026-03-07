@@ -261,57 +261,141 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* full-time freelance private tutors managing multiple students
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* can type fast and are comfortable with CLI applications
+* want to manage student contacts, appointments, and payments in one place
+* need a quick way to track lessons, attendance, and tuition payments
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: TutorFlow allows freelance tutors to manage their students, appointments, attendance, and tuition payments quickly through a centralized CLI-based platform, reducing scheduling conflicts and helping tutors track their tutoring activities efficiently.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​ | So that I can…​ |
+| -------- | ------- | ------------ | ---------------- |
+| `* * *` | tutor | add a new contact to the address book | track which tutees I currently teach |
+| `* * *` | new user | delete a contact | remove contacts that I no longer need |
+| `* * *` | tutor | add appointment details to a contact | track lesson schedules with students |
+| `* * *` | freelance tutor | view what appointments I have for the week | plan my tutoring schedule appropriately |
+| `* * *` | tutor | track whether a client has paid tuition fees for the month | keep track of outstanding payments |
+| `* *` | tutor | view the payment dates | know when my clients have paid for lessons |
+| `* *` | tutor | add and view student attendance | evaluate lesson attendance and consistency |
+| `* *` | tutor | store the name of the tutee alongside the parent’s name | easily identify the student and their guardian |
+| `*` | tutor | filter students by subject tags | quickly see which students take which subjects |
+| `*` | tutor with multiple students | tag students based on subject or level | organize students for possible group tuition |                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `TutorFlow` and the **Actor** is the `Tutor`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+
+**Use case: Add appointment details for a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Tutor requests to list students.
+2. TutorFlow shows the list of students.
+3. Tutor selects a student.
+4. Tutor enters appointment details for the student.
+5. TutorFlow records the appointment details and displays confirmation.
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The student list is empty.
+
+  * 2a1. TutorFlow informs the tutor that there are no students recorded.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 4a. The tutor enters invalid appointment details.
 
-    * 3a1. AddressBook shows an error message.
+  * 4a1. TutorFlow shows an error message.
+  * 4a2. Tutor re-enters valid appointment details.
 
-      Use case resumes at step 2.
+  Use case resumes at step 5.
+
+---
+
+**Use case: Record tuition payment for a student**
+
+**MSS**
+
+1. Tutor requests to list students.
+2. TutorFlow shows the list of students.
+3. Tutor selects a student.
+4. Tutor records that the student has paid tuition for the month.
+5. TutorFlow updates the student’s payment status and displays confirmation.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
+
+  * 2a1. TutorFlow informs the tutor that there are no students recorded.
+
+  Use case ends.
+
+* 4a. The tutor enters invalid payment information.
+
+  * 4a1. TutorFlow shows an error message.
+  * 4a2. Tutor re-enters the payment information.
+
+  Use case resumes at step 5.
+
+  **Use case: Add Parent Details with Student Contact**
+
+  **MSS**
+
+  1. Tutor requests to add a parent together with a student contact.
+  2. Tutorflow requests for the parent and contact details.
+  3. Tutor provides parent name, student name, phone number, email and address.
+  4. Tutorflow validates the provided details.
+  5. Tutorflow checks for any duplicate entries.
+  6. Tutorflow stores the new parent and student contact information.
+  7. Tutor confirms that the parent and student contact has been added.
+
+ 
+  Use case ends.
+
+  **Extensions**
+
+  * 4a. Parent name is empty or invalid
+    
+     * 4a1. Tutorflow detects an error in the entered data.
+     * 4a2. Tutorflow requests the tutor to provide valid details.
+
+   Use case resumes from step 3.
+
+  * 4b. Extremely long or invalid input detected
+ 
+     * 4b1. Tutorflow rejects the input and informs tutor that the input is invalid.
+   
+  Use case ends.
+
+  * 5a. Student name is empty or invalid
+ 
+     * 5a1. Tutorflow informs the tutor that the parent-student pair already exists.
+       
+   Use case ends.
+
+  * 5b. Duplicate field detected
+ 
+     * 5b1. Tutorflow detects duplicate fields in the entered data.
+     * 5b2. Tutorflow requests the tutor to provide the details again.
+
+   Use case resumes from step 3.
+
+
+---
 
 *{More to be added}*
 
