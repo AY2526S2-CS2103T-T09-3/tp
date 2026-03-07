@@ -1,6 +1,6 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2526S2-CS2103T-T09-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2526S2-CS2103T-T09-3/tp/actions)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/tutorflow_ui_mockup.png)
 
 # TutorFlow
 
@@ -8,7 +8,33 @@ TutorFlow is a desktop application for full-time freelance private tutors who te
 
 Most interactions happen using a CLI (Command Line Interface), while the GUI provides a clear overview of contacts and upcoming sessions.
 
+## Installation Instructions
+
+### Prerequisits
+
+Ensure that Java 17 is installed on your system.
+
+### Installation Steps
+
+1. Download the latest `.jar` release from [here](https://github.com/se-edu/addressbook-level3/releases/tag/v0.3).
+2. Move the downloaded `.jar` file into your desired folder. 
+3. From that folder, open a terminal or command prompt.
+4. Run the command `java -jar tutorflow.jar` to start the app.
+
+## Features
+
+* View your appointment details with ease!
+* Leave no student behind with our attendance tracking feature!
+* Ensure all tuition fees are paid on time through our payments tracker!
+* Mixing up the parents' and tutees' names? Fret not, our app allows you to link both names together!
+* Keep in track with your tutees' progress with our progress tracker!
+
+## Helpful Links
+
+* [User Guide](https://ay2526s2-cs2103t-t09-3.github.io/tp/UserGuide.html)
+* [Developer Guide](https://ay2526s2-cs2103t-t09-3.github.io/tp/DeveloperGuide.html)
+* [About Us](https://ay2526s2-cs2103t-t09-3.github.io/tp/AboutUs.html)
+
+## Acknowledgements
+
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-Documentation:
-* [User Guide](docs/UserGuide.md)
-* [Developer Guide](docs/DeveloperGuide.md)
