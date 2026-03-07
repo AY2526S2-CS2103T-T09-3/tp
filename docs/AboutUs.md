@@ -5,55 +5,49 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Khay Liang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/khayliang.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/khayliang)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: ?
 
-### Jean Doe
+### Minh Duc
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vuminhducvmd.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/vuminhducvmd)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: ?
+
+### Tang Zhi Xiang
+
+<img src="images/darkrelicz.png" width="200px">
+
+[[github](https://github.com/darkrelicz)]
+
+* Role: Developer
+* Responsibilities: ?
+
+### Tan Yu Quan
+
+<img src="images/yuquanzzz.png" width="200px">
+
+[[github](http://github.com/yuquanzzz)]
+
+* Role: Developer
+* Responsibilities: ?
+
+### Judah Pang
+
+<img src="images/beedahju.png" width="200px">
+
+[[github](http://github.com/beedahju)]
+
+* Role: Developer
+* Responsibilities: ?
