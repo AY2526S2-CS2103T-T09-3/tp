@@ -3,18 +3,17 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JC;
 import static seedu.address.testutil.Assert.assertThrows;
+import seedu.address.testutil.PersonBuilder;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
-
-import org.junit.jupiter.api.Test;
-
-import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
 
@@ -92,6 +91,10 @@ public class PersonTest {
         // different appointment start -> returns false
         editedAlice = new PersonBuilder(ALICE).withAppointmentStart("2026-01-13T08:00:00").build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different payment date -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPaymentDate("2026-01-13T08:00:00").build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -99,7 +102,8 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
                 + ", parentName=" + ALICE.getParentName().orElse(null)
-                + ", appointmentStart=" + ALICE.getAppointmentStart() + "}";
+                + ", appointmentStart=" + ALICE.getAppointmentStart()
+                + ", paymentDate=" + ALICE.getPaymentDate() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

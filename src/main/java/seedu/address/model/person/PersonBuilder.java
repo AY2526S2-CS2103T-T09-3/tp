@@ -19,6 +19,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Optional<ParentName> parentName;
     private Optional<LocalDateTime> appointmentStart;
+    private Optional<LocalDateTime> paymentDate;
 
     /**
      * Creates a builder initialized with the data of {@code personToCopy}.
@@ -31,6 +32,7 @@ public class PersonBuilder {
         this.tags = new HashSet<>(personToCopy.getTags());
         this.parentName = personToCopy.getParentName();
         this.appointmentStart = personToCopy.getAppointmentStart();
+        this.paymentDate = personToCopy.getPaymentDate();
     }
 
     /**
@@ -112,6 +114,17 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the payment date of the {@code Person} being built.
+     *
+     * @param paymentDate the optional payment date
+     * @return this {@code PersonBuilder} instance for method chaining
+     */
+    public PersonBuilder withPaymentDate(Optional<LocalDateTime> paymentDate) {
+        this.paymentDate = paymentDate;
+        return this;
+    }
+
+    /**
      * Builds a {@code Person} with the current builder state.
      */
     public Person build() {
@@ -122,7 +135,8 @@ public class PersonBuilder {
                 address,
                 tags,
                 parentName,
-                appointmentStart
+                appointmentStart,
+                paymentDate
         );
     }
 }

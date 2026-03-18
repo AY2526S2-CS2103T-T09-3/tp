@@ -1,7 +1,14 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -9,18 +16,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.Assert.assertThrows;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import static seedu.address.testutil.Assert.assertThrows;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -43,6 +43,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_JC = "JC";
     public static final String VALID_TAG_GROUP1 = "Group1";
     public static final String VALID_APPOINTMENT_START = "2026-01-13T08:00:00";
+    public static final String VALID_PAYMENT_DATE = "2026-02-03T10:00:00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
