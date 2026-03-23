@@ -3,6 +3,7 @@ package seedu.address.model.billing;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -13,30 +14,19 @@ import java.util.Set;
  */
 public class Payment {
 
-    public static final Payment EMPTY = new Payment(Collections.emptySet());
+    public static final Payment EMPTY = new Payment();
 
     private final Set<LocalDate> paidDates;
 
     /**
      * Creates a {@code Payment} object with payment history
-     * @param paidDates Payment history
+     * @param paidDates Payment dates (varargs for convenience)
      */
-    public Payment(Set<LocalDate> paidDates) {
+    public Payment(LocalDate... paidDates) {
         requireNonNull(paidDates);
-        this.paidDates = Collections.unmodifiableSet(new LinkedHashSet<>(paidDates));
+        this.paidDates = Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(paidDates)));
     }
 
-    /**
-     * Returns a {@code Payment} object with recorded first payment date
-     * @param date A valid first payment date
-     * @return {@code Payment} object
-     */
-    public static Payment withInitialDate(LocalDate date) {
-        requireNonNull(date);
-        Set<LocalDate> dates = new LinkedHashSet<>();
-        dates.add(date);
-        return new Payment(dates);
-    }
 
     public Set<LocalDate> getPaidDates() {
         return paidDates;
@@ -51,7 +41,7 @@ public class Payment {
         requireNonNull(date);
         Set<LocalDate> next = new LinkedHashSet<>(paidDates);
         next.add(date);
-        return new Payment(next);
+        return new Payment(next.toArray(new LocalDate[0]));
     }
 
     /**

@@ -99,7 +99,7 @@ public class PersonTest {
 
         // different payment date -> returns false
         LocalDate differentPaymentDate = LocalDate.parse("2026-01-13");
-        Payment differentPaymentHistory = Payment.withInitialDate(differentPaymentDate);
+        Payment differentPaymentHistory = new Payment(differentPaymentDate);
         editedAlice = new PersonBuilder(ALICE).withPayment(differentPaymentHistory).build();
         assertFalse(ALICE.equals(editedAlice));
 

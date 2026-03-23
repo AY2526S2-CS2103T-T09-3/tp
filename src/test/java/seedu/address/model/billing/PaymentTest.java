@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +24,7 @@ public class PaymentTest {
     public void constructor_validPaidDates_success() {
         Set<LocalDate> dates = new HashSet<>();
         dates.add(DATE_1);
-        Payment payment = new Payment(dates);
+        Payment payment = new Payment(dates.toArray(new LocalDate[0]));
         assertEquals(1, payment.getPaidDates().size());
         assertTrue(payment.getPaidDates().contains(DATE_1));
     }
@@ -30,7 +32,7 @@ public class PaymentTest {
     @Test
     public void constructor_emptyPaidDates_success() {
         Set<LocalDate> dates = new HashSet<>();
-        Payment payment = new Payment(dates);
+        Payment payment = new Payment(dates.toArray(new LocalDate[0]));
         assertEquals(0, payment.getPaidDates().size());
     }
 
@@ -40,23 +42,38 @@ public class PaymentTest {
     }
 
     @Test
-    public void withInitialDate_validDate_returnsPaymentWithDate() {
-        Payment payment = Payment.withInitialDate(DATE_1);
+    public void constructor_varargs_validDates_success() {
+        Payment payment = new Payment(DATE_1, DATE_2);
+        assertEquals(2, payment.getPaidDates().size());
         assertTrue(payment.getPaidDates().contains(DATE_1));
-        assertEquals(1, payment.getPaidDates().size());
+        assertTrue(payment.getPaidDates().contains(DATE_2));
     }
 
     @Test
-    public void withInitialDate_nullDate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> Payment.withInitialDate(null));
+    public void constructor_varargs_singleDate_success() {
+        Payment payment = new Payment(DATE_1);
+        assertEquals(1, payment.getPaidDates().size());
+        assertTrue(payment.getPaidDates().contains(DATE_1));
+    }
+
+    @Test
+    public void constructor_varargs_empty_success() {
+        Payment payment = new Payment();
+        assertEquals(0, payment.getPaidDates().size());
+    }
+
+    @Test
+    public void constructor_varargs_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Payment((LocalDate[]) null));
     }
 
     @Test
     public void recordPayment_validDate_returnsNewPaymentWithAddedDate() {
-        Payment original = Payment.EMPTY;
-        Payment updated = original.recordPayment(DATE_1);
+        Payment original = new Payment(DATE_1);
+        Payment updated = original.recordPayment(DATE_2);
         assertTrue(updated.getPaidDates().contains(DATE_1));
-        assertFalse(original.getPaidDates().contains(DATE_1)); // Original unchanged (immutable)
+        assertTrue(updated.getPaidDates().contains(DATE_2));
+        assertFalse(original.getPaidDates().contains(DATE_2)); // Original unchanged (immutable)
     }
 
     @Test
@@ -79,20 +96,20 @@ public class PaymentTest {
 
     @Test
     public void recordPayment_duplicateDate_ignoresDuplicate() {
-        Payment payment = Payment.withInitialDate(DATE_1);
+        Payment payment = new Payment(DATE_1);
         Payment updated = payment.recordPayment(DATE_1);
         assertEquals(1, updated.getPaidDates().size());
     }
 
     @Test
     public void hasPaidOn_dateInHistory_returnsTrue() {
-        Payment payment = Payment.withInitialDate(DATE_1);
+        Payment payment = new Payment(DATE_1);
         assertTrue(payment.hasPaidOn(DATE_1));
     }
 
     @Test
     public void hasPaidOn_dateNotInHistory_returnsFalse() {
-        Payment payment = Payment.withInitialDate(DATE_1);
+        Payment payment = new Payment(DATE_1);
         assertFalse(payment.hasPaidOn(DATE_2));
     }
 
@@ -117,37 +134,22 @@ public class PaymentTest {
 
     @Test
     public void equals_sameValues_returnsTrue() {
-        Set<LocalDate> dates1 = new HashSet<>();
-        dates1.add(DATE_1);
-        dates1.add(DATE_2);
-        Set<LocalDate> dates2 = new HashSet<>();
-        dates2.add(DATE_1);
-        dates2.add(DATE_2);
-        Payment payment1 = new Payment(dates1);
-        Payment payment2 = new Payment(dates2);
+        Payment payment1 = new Payment(DATE_1, DATE_2);
+        Payment payment2 = new Payment(DATE_1, DATE_2);
         assertTrue(payment1.equals(payment2));
     }
 
     @Test
     public void equals_differentDates_returnsFalse() {
-        Set<LocalDate> dates1 = new HashSet<>();
-        dates1.add(DATE_1);
-        Set<LocalDate> dates2 = new HashSet<>();
-        dates2.add(DATE_2);
-        Payment payment1 = new Payment(dates1);
-        Payment payment2 = new Payment(dates2);
+        Payment payment1 = new Payment(DATE_1);
+        Payment payment2 = new Payment(DATE_2);
         assertFalse(payment1.equals(payment2));
     }
 
     @Test
     public void equals_differentDateCount_returnsFalse() {
-        Set<LocalDate> dates1 = new HashSet<>();
-        dates1.add(DATE_1);
-        Set<LocalDate> dates2 = new HashSet<>();
-        dates2.add(DATE_1);
-        dates2.add(DATE_2);
-        Payment payment1 = new Payment(dates1);
-        Payment payment2 = new Payment(dates2);
+        Payment payment1 = new Payment(DATE_1);
+        Payment payment2 = new Payment(DATE_2);
         assertFalse(payment1.equals(payment2));
     }
 
@@ -165,31 +167,21 @@ public class PaymentTest {
 
     @Test
     public void hashCode_sameValues_sameHashCode() {
-        Set<LocalDate> dates1 = new HashSet<>();
-        dates1.add(DATE_1);
-        Set<LocalDate> dates2 = new HashSet<>();
-        dates2.add(DATE_1);
-        Payment payment1 = new Payment(dates1);
-        Payment payment2 = new Payment(dates2);
+        Payment payment1 = new Payment(DATE_1);
+        Payment payment2 = new Payment(DATE_1);
         assertEquals(payment1.hashCode(), payment2.hashCode());
     }
 
     @Test
     public void hashCode_differentDates_differentHashCode() {
-        Set<LocalDate> dates1 = new HashSet<>();
-        dates1.add(DATE_1);
-        Set<LocalDate> dates2 = new HashSet<>();
-        dates2.add(DATE_2);
-        Payment payment1 = new Payment(dates1);
-        Payment payment2 = new Payment(dates2);
+        Payment payment1 = new Payment(DATE_1);
+        Payment payment2 = new Payment(DATE_2);
         assertNotEquals(payment1.hashCode(), payment2.hashCode());
     }
 
     @Test
     public void toString_validPayment_returnsFormattedString() {
-        Set<LocalDate> dates = new HashSet<>();
-        dates.add(DATE_1);
-        Payment payment = new Payment(dates);
+        Payment payment = new Payment(DATE_1);
         String result = payment.toString();
         assertTrue(result.contains("Payment"));
         assertTrue(result.contains(DATE_1.toString()));
@@ -197,9 +189,7 @@ public class PaymentTest {
 
     @Test
     public void getPaidDates_returnsUnmodifiableSet() {
-        Set<LocalDate> dates = new HashSet<>();
-        dates.add(DATE_1);
-        Payment payment = new Payment(dates);
+        Payment payment = new Payment(DATE_1);
         Set<LocalDate> retrievedDates = payment.getPaidDates();
         assertThrows(UnsupportedOperationException.class, () ->
                 retrievedDates.add(DATE_2)); // Should not be able to modify

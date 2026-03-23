@@ -246,7 +246,7 @@ class JsonAdaptedPerson {
 
         Payment modelPayment;
         if (!modelPaidDates.isEmpty()) {
-            modelPayment = new Payment(modelPaidDates);
+            modelPayment = new Payment(modelPaidDates.toArray(new LocalDate[0]));
         } else {
             modelPayment = Payment.EMPTY;
         }
