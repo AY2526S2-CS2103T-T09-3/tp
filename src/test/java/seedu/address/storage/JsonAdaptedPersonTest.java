@@ -25,6 +25,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_APPOINTMENT_START = "2026-13-40T25:00:00";
+    private static final String INVALID_PAYMENT_DATE = "2026-13-40T25:00:00";
     private static final List<String> INVALID_PAYMENT_HISTORY =
             List.of("2026-13-40", "2026-10-10T10:00:00");
     private static final String INVALID_PAYMENT_DUE_DATE = "2026-02-29T02:00:00";
