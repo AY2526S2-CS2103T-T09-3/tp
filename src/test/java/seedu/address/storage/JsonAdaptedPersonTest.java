@@ -25,7 +25,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_APPOINTMENT_START = "2026-13-40T25:00:00";
-    private static final List<String> INVALID_PAYMENT_DATES =
+    private static final List<String> INVALID_PAYMENT_HISTORY =
             List.of("2026-13-40", "2026-10-10T10:00:00");
     private static final String INVALID_PAYMENT_DUE_DATE = "2026-02-29T02:00:00";
     private static final String INVALID_PAYMENT_RECURRENCE = "hello";
@@ -37,7 +37,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_APPOINTMENT_START = "2026-01-13T08:00:00";
-    private static final List<String> VALID_PAYMENT_DATES = List.of("2026-01-13", "2026-02-16");
+    private static final List<String> VALID_PAYMENT_HISTORY = List.of("2026-01-13", "2026-02-16");
     private static final String VALID_PAYMENT_DUE_DATE = "2026-03-30";
     private static final String VALID_PAYMENT_RECURRENCE = "MONTHLY";
     private static final Double VALID_TUITION_FEE = 25.0;
@@ -64,7 +64,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
@@ -78,7 +78,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
@@ -92,7 +92,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
@@ -106,7 +106,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
@@ -120,7 +120,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
@@ -134,7 +134,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
@@ -148,7 +148,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
 
@@ -163,7 +163,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
 
@@ -180,7 +180,7 @@ public class JsonAdaptedPersonTest {
                         invalidTags, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
 
@@ -194,7 +194,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         INVALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         assertThrows(IllegalValueException.class, person::toModelType);
@@ -207,7 +207,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        INVALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        INVALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         assertThrows(IllegalValueException.class, person::toModelType);
@@ -220,7 +220,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, INVALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, INVALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         assertThrows(IllegalValueException.class, person::toModelType);
@@ -233,7 +233,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         INVALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         assertThrows(IllegalValueException.class, person::toModelType);
@@ -246,7 +246,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, INVALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
         assertThrows(IllegalArgumentException.class, person::toModelType);
@@ -259,7 +259,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, VALID_SUBJECTS,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         INVALID_LAST_ATTENDANCE);
         assertThrows(IllegalValueException.class, person::toModelType);
@@ -275,7 +275,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, invalidSubjects,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
 
@@ -298,7 +298,7 @@ public class JsonAdaptedPersonTest {
                         VALID_TAGS, new ArrayList<>(),
                         VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                         VALID_APPOINTMENT_START,
-                        VALID_PAYMENT_DATES, VALID_PAYMENT_DUE_DATE,
+                        VALID_PAYMENT_HISTORY, VALID_PAYMENT_DUE_DATE,
                         VALID_PAYMENT_RECURRENCE, VALID_TUITION_FEE,
                         VALID_LAST_ATTENDANCE);
 
