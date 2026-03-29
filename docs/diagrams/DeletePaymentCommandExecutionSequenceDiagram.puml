@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "c:DeletePaymentCommand" as DeletePaymentCommand LOGIC_COLOR
+participant ":PersonBuilder" as PersonBuilder LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+participant "b:Billing" as Billing MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":Storage" as Storage STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("delete payment 1 d/2026-03-01")
+activate LogicManager
+
+LogicManager -> DeletePaymentCommand : execute(m)
+activate DeletePaymentCommand
+
+DeletePaymentCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> DeletePaymentCommand : displayed students
+deactivate Model
+
+DeletePaymentCommand -> Person : deleteRecordedPayment(date)
+activate Person
+Person -> Billing : deleteRecordedPayment(date)
+activate Billing
+Billing --> Person : updatedBilling
+deactivate Billing
+Person --> DeletePaymentCommand : updatedBilling
+deactivate Person
+
+create PersonBuilder
+DeletePaymentCommand -> PersonBuilder : PersonBuilder(personToEdit)
+activate PersonBuilder
+DeletePaymentCommand -> PersonBuilder : withBilling(updatedBilling)
+DeletePaymentCommand -> PersonBuilder : build()
+PersonBuilder --> DeletePaymentCommand : editedPerson
+deactivate PersonBuilder
+
+DeletePaymentCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+Model --> DeletePaymentCommand
+deactivate Model
+
+create CommandResult
+DeletePaymentCommand -> CommandResult : CommandResult(...)
+activate CommandResult
+CommandResult --> DeletePaymentCommand : r
+deactivate CommandResult
+
+DeletePaymentCommand --> LogicManager : r
+deactivate DeletePaymentCommand
+
+LogicManager -> Model : getAddressBook()
+activate Model
+Model --> LogicManager : updated address book
+deactivate Model
+
+LogicManager -> Storage : saveAddressBook(...)
+activate Storage
+Storage --> LogicManager
+deactivate Storage
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

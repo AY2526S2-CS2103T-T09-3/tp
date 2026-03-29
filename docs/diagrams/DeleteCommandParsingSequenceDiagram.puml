@@ -1,0 +1,57 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant ":DeletePaymentCommandParser" as DeletePaymentCommandParser LOGIC_COLOR
+participant "c:DeletePaymentCommand" as DeletePaymentCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("delete payment 1 d/2026-03-01")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser
+
+create DeleteCommandParser
+AddressBookParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> AddressBookParser
+deactivate DeleteCommandParser
+
+AddressBookParser -> DeleteCommandParser : parse("payment 1 d/2026-03-01")
+activate DeleteCommandParser
+
+create DeletePaymentCommandParser
+DeleteCommandParser -> DeletePaymentCommandParser
+activate DeletePaymentCommandParser
+
+DeletePaymentCommandParser --> DeleteCommandParser
+deactivate DeletePaymentCommandParser
+
+DeleteCommandParser -> DeletePaymentCommandParser : parse("1 d/2026-03-01")
+activate DeletePaymentCommandParser
+
+create DeletePaymentCommand
+DeletePaymentCommandParser -> DeletePaymentCommand
+activate DeletePaymentCommand
+
+DeletePaymentCommand --> DeletePaymentCommandParser
+deactivate DeletePaymentCommand
+
+DeletePaymentCommandParser --> DeleteCommandParser : c
+deactivate DeletePaymentCommandParser
+
+DeleteCommandParser --> AddressBookParser : c
+deactivate DeleteCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

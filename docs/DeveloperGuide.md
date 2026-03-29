@@ -91,18 +91,18 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete student 1")` as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete student 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, the input is passed to `AddressBookParser`, which routes it to the matching command parser (e.g., `DeleteCommandParser`).
+1. This produces a concrete `Command` object (e.g., `DeletePersonCommand`), which is then executed by `LogicManager`.
+1. The command may communicate with the `Model` during execution (e.g., to delete a student or update a student's billing/payment data).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -181,6 +181,39 @@ How the `edit` command works:
 1. During execution, the command resolves the target student from the currently displayed list, builds the edited `Person`, and checks any command-specific constraints.
 1. The command updates the `Model`, which replaces the target `Person` in the `AddressBook` while preserving the active filter.
 1. `LogicManager` detects that the address book changed and persists the updated state through `Storage`.
+
+### Delete command
+
+The `delete` family uses subcommand dispatch similar to `edit`. To keep the diagrams readable, the flow is split into command hierarchy, parser-dispatch, parsing, and execution diagrams.
+
+<img src="images/DeleteCommandHierarchyClassDiagram.png" width="520" />
+
+<img src="images/DeleteCommandParserClassDiagram.png" width="720" />
+
+The first sequence diagram shows parsing flow for `delete payment 1 d/2026-03-01`.
+
+<img src="images/DeleteCommandParsingSequenceDiagram.png" width="700" />
+
+The second sequence diagram shows execution flow for `delete student 1`.
+
+<img src="images/DeleteCommandExecutionSequenceDiagram.png" width="760" />
+
+How the `delete` command works:
+
+1. `AddressBookParser` recognizes `delete` as the command word and forwards the remaining input to `DeleteCommandParser`.
+1. `DeleteCommandParser` dispatches by subcommand name (`student`, `payment`, etc.) and invokes the matching concrete parser.
+1. The concrete parser validates index and command-specific arguments, then constructs the corresponding `Delete...Command`.
+1. During execution, the command resolves the target student from the currently displayed list.
+1. The command performs command-specific deletion logic and updates the `Model` (`deletePerson(...)` for student deletion, or `setPerson(...)` after rebuilding an edited person for payment-date deletion).
+1. `LogicManager` detects address-book mutation and persists the updated state through `Storage`.
+
+#### Delete payment execution flow
+
+The sequence diagram below focuses on `DeletePaymentCommand` execution and its domain interactions.
+
+<img src="images/DeletePaymentCommandExecutionSequenceDiagram.png" width="780" />
+
+For `delete payment`, command execution delegates payment-history mutation to the domain layer (`Person` and `Billing`), then rebuilds the edited `Person` using `PersonBuilder` before updating the model.
 
 
 ### Find command

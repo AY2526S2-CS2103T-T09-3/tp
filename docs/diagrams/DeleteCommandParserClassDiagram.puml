@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+!pragma layout smetana
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+top to bottom direction
+
+package "Delete parser structure" {
+interface "<<interface>>\nParser<T>" as Parser
+class DeleteCommandParser
+class "SubcommandDispatcherParser<DeleteCommand>" as Dispatcher
+
+class DeletePersonCommandParser
+class DeletePaymentCommandParser
+
+abstract class "{abstract}\nDeleteCommand" as DeleteCommand
+class DeletePersonCommand
+class DeletePaymentCommand
+}
+
+DeleteCommandParser .up.|> Parser
+DeletePersonCommandParser .up.|> Parser
+DeletePaymentCommandParser .up.|> Parser
+
+DeleteCommandParser *--> Dispatcher : owns
+Dispatcher ..> Parser : dispatches to
+DeleteCommandParser ..> DeleteCommand : <<returns>>
+
+DeletePersonCommandParser ..> DeletePersonCommand : <<create>>
+DeletePaymentCommandParser ..> DeletePaymentCommand : <<create>>
+
+note right of Dispatcher
+Maps each delete subcommand word
+such as `student` and `payment`
+to its concrete parser.
+end note
+
+@enduml
