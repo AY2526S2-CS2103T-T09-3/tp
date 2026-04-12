@@ -28,7 +28,8 @@ final class AppointmentDescriptionParser {
         int valueStart = descriptionStart + CliSyntax.PREFIX_DESCRIPTION.getPrefix().length();
         ParseBounds bounds = parseDescriptionBounds(args, valueStart, otherPrefixes);
 
-        int duplicateDescriptionStart = findValidPrefixPosition(args, CliSyntax.PREFIX_DESCRIPTION, bounds.endExclusive);
+        int duplicateDescriptionStart =
+                findValidPrefixPosition(args, CliSyntax.PREFIX_DESCRIPTION, bounds.endExclusive);
         if (duplicateDescriptionStart != -1) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_DESCRIPTION));
         }
@@ -36,7 +37,10 @@ final class AppointmentDescriptionParser {
         String description = bounds.quoted
                 ? args.substring(valueStart + 1, bounds.endExclusive - 1)
                 : args.substring(valueStart, bounds.endExclusive);
-        String remainingArgs = (args.substring(0, descriptionStart) + " " + args.substring(bounds.endExclusive)).trim();
+        String remainingArgs = args.substring(0, descriptionStart)
+                + " "
+                + args.substring(bounds.endExclusive);
+        remainingArgs = remainingArgs.trim();
 
         return new ExtractionResult(remainingArgs, Optional.of(description.trim()));
     }
