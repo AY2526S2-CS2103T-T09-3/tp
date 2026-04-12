@@ -24,11 +24,13 @@ public class EditApptCommandParser implements Parser<EditApptCommand> {
     @Override
     public EditApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_SESSION, PREFIX_DATE, PREFIX_RECURRENCE, PREFIX_DESCRIPTION);
+        AppointmentDescriptionParser.ExtractionResult descriptionResult =
+                AppointmentDescriptionParser.extract(args, PREFIX_SESSION, PREFIX_DATE, PREFIX_RECURRENCE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(descriptionResult.getRemainingArgs(),
+                PREFIX_SESSION, PREFIX_DATE, PREFIX_RECURRENCE);
 
         Index personIndex = ParserUtil.parseIndex(argMultimap.getPreamble(), EditApptCommand.MESSAGE_USAGE);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SESSION, PREFIX_DATE, PREFIX_RECURRENCE, PREFIX_DESCRIPTION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SESSION, PREFIX_DATE, PREFIX_RECURRENCE);
 
         if (argMultimap.getValue(PREFIX_SESSION).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditApptCommand.MESSAGE_USAGE));
@@ -48,8 +50,8 @@ public class EditApptCommandParser implements Parser<EditApptCommand> {
         }
 
         Optional<String> description = Optional.empty();
-        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            String parsedDescription = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+        if (descriptionResult.getDescription().isPresent()) {
+            String parsedDescription = descriptionResult.getDescription().get().trim();
             if (parsedDescription.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditApptCommand.MESSAGE_USAGE));
             }

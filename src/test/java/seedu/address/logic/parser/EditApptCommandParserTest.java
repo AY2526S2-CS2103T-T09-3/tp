@@ -66,4 +66,13 @@ public class EditApptCommandParserTest {
                         Optional.of(Recurrence.WEEKLY),
                         Optional.of("Weekly algebra practice")));
     }
+
+    @Test
+    public void parse_quotedDescriptionContainingPrefixLikeText_success() {
+        assertParseSuccess(parser, "1 " + PREFIX_SESSION + "1 dsc/\" d d/lol \"",
+                new EditApptCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON,
+                        Optional.empty(),
+                        Optional.empty(),
+                        Optional.of("d d/lol")));
+    }
 }

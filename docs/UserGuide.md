@@ -460,6 +460,8 @@ Details:
 * `r/RECURRENCE` is optional. Valid values are `NONE`, `WEEKLY`, `BIWEEKLY`, and `MONTHLY`.
 * If `r/` is omitted, TutorFlow uses `NONE`.
 * `dsc/` is required and should describe the session.
+* If the description contains text that looks like a prefix such as `d/` or `r/`, wrap the description in double
+  quotes.
 
 Examples:
 * `add appt 1 d/2026-01-29T08:00:00 dsc/Weekly algebra practice`
@@ -494,6 +496,8 @@ Details:
 * `d/DATETIME` must be in ISO 8601 local date-time format (`YYYY-MM-DDTHH:MM:SS`).
 * `r/RECURRENCE` supports `NONE`, `WEEKLY`, `BIWEEKLY`, and `MONTHLY`.
 * `dsc/DESCRIPTION` updates the session description.
+* If the description contains text that looks like a prefix such as `d/` or `r/`, wrap the description in double
+  quotes.
 * Any field you omit remains unchanged.
 
 Examples:

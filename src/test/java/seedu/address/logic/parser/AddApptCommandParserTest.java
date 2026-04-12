@@ -79,4 +79,16 @@ public class AddApptCommandParserTest {
                 VALID_APPOINTMENT_DESCRIPTION);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    @Test
+    public void parse_quotedDescriptionContainingPrefixLikeText_success() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased()
+                + " d/2000-01-01T00:00:00 dsc/\" d d/lol \"";
+        AddApptCommand expectedCommand = new AddApptCommand(targetIndex,
+                LocalDateTime.parse("2000-01-01T00:00:00"),
+                Recurrence.NONE,
+                "d d/lol");
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }

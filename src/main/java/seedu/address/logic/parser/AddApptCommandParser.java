@@ -21,13 +21,15 @@ public class AddApptCommandParser implements Parser<AddApptCommand> {
     @Override
     public AddApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_DATE, PREFIX_RECURRENCE, PREFIX_DESCRIPTION);
+        AppointmentDescriptionParser.ExtractionResult descriptionResult =
+                AppointmentDescriptionParser.extract(args, PREFIX_DATE, PREFIX_RECURRENCE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(descriptionResult.getRemainingArgs(),
+                PREFIX_DATE, PREFIX_RECURRENCE);
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble(), AddApptCommand.MESSAGE_USAGE);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_RECURRENCE, PREFIX_DESCRIPTION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_RECURRENCE);
 
-        if (argMultimap.getValue(PREFIX_DATE).isEmpty() || argMultimap.getValue(PREFIX_DESCRIPTION).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_DATE).isEmpty() || descriptionResult.getDescription().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddApptCommand.MESSAGE_USAGE));
         }
@@ -39,7 +41,7 @@ public class AddApptCommandParser implements Parser<AddApptCommand> {
             recurrence = ParserUtil.parseRecurrence(argMultimap.getValue(PREFIX_RECURRENCE).get());
         }
 
-        String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+        String description = descriptionResult.getDescription().orElseThrow();
         if (description.isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddApptCommand.MESSAGE_USAGE));
