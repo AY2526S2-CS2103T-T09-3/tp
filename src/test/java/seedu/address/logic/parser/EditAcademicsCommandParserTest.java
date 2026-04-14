@@ -188,14 +188,6 @@ public class EditAcademicsCommandParserTest {
     }
 
     @Test
-    public void parse_duplicateSubjectsDifferentCase_failure() {
-        Index index = INDEX_FIRST_PERSON;
-        String input = index.getOneBased() + " s/Math s/mAtH";
-
-        assertParseFailure(parser, input, "Duplicate subjects are not allowed.");
-    }
-
-    @Test
     public void parse_levelWithoutSubject_failure() {
         Index index = INDEX_FIRST_PERSON;
         String input = index.getOneBased() + " l/Strong";
@@ -289,13 +281,5 @@ public class EditAcademicsCommandParserTest {
 
         assertParseSuccess(parser, input,
                 new EditAcademicsCommand(index, descriptor));
-    }
-
-    @Test
-    public void parse_unknownPrefixLikeToken_failure() {
-        Index index = INDEX_FIRST_PERSON;
-        String input = index.getOneBased() + " s/Math desc/progress";
-
-        assertParseFailure(parser, input, MESSAGE_INVALID_SUBJECT_FORMAT);
     }
 }

@@ -103,7 +103,7 @@ public class EditAcademicsCommandParser implements Parser<EditAcademicsCommand> 
                 List<Subject> subjects = parseResult.get();
                 Set<String> seen = new HashSet<>();
                 for (Subject s : subjects) {
-                    if (!seen.add(s.getName().toLowerCase())) {
+                    if (!seen.add(s.getName())) {
                         throw new ParseException("Duplicate subjects are not allowed.");
                     }
                 }

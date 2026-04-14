@@ -3,6 +3,8 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.util.StringUtil;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -26,9 +28,10 @@ public class Tag {
         String trimmed = tagName.trim();
         checkArgument(!trimmed.isEmpty(), MESSAGE_CONSTRAINTS);
 
-        checkArgument(isValidTagName(trimmed), MESSAGE_CONSTRAINTS);
+        String normalized = StringUtil.toTitleCase(trimmed);
+        checkArgument(isValidTagName(normalized), MESSAGE_CONSTRAINTS);
 
-        this.tagName = trimmed;
+        this.tagName = normalized;
     }
 
     /**
@@ -58,12 +61,12 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equalsIgnoreCase(otherTag.tagName);
+        return tagName.equals(otherTag.tagName);
     }
 
     @Override
     public int hashCode() {
-        return tagName.toLowerCase().hashCode();
+        return tagName.hashCode();
     }
 
     /**
