@@ -120,7 +120,7 @@
       "src": "UserGuide.md",
       "title": "User Guide",
       "headings": {
-        "quick-start": "Quick start",
+        "quick-start-tutorial": "Quick Start / Tutorial",
         "tutorflow-at-a-glance": "TutorFlow at a glance",
         "guide-conventions-and-behaviour": "Guide conventions and behaviour",
         "student-management": "Student Management",
@@ -172,6 +172,8 @@
         "editing-the-data-file": "Editing the data file",
         "faq": "FAQ",
         "troubleshooting": "Troubleshooting",
+        "general-issues": "General issues",
+        "command-specific-quick-fixes": "Command-specific quick fixes",
         "known-issues": "Known issues",
         "command-summary": "Command summary",
         "student-management-2": "Student Management",
